@@ -39,9 +39,9 @@ namespace WebApiStock.Controllers
             return Ok(articulosDTO);
         }
 
-    
+
         [HttpPost]
-        public IActionResult CrearArticulo(ArticuloDTO articuloDTO)
+        public IActionResult CrearArticulo([FromBody] ArticuloDTO articuloDTO)
         {
             try
             {
@@ -54,6 +54,7 @@ namespace WebApiStock.Controllers
                 return BadRequest("No se pudo agregar el Articulo: " + ex.Message);
             }
         }
+
 
 
         [HttpPut("{id}")]
