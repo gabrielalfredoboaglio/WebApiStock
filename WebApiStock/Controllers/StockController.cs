@@ -55,6 +55,52 @@ namespace WebApiStock.Controllers
             }
         }
 
+        [HttpPost("IngresarStock")]
+        public IActionResult IngresarStock([FromBody] IngresoStockDTO ingresoStockDTO)
+        {
+            try
+            {
+                var result = _stockService.IngresarStock(ingresoStockDTO.CodigoArticulo, (int)ingresoStockDTO.IdDeposito, (decimal)ingresoStockDTO.Cantidad);
+
+                if (result.HuboError)
+                {
+                    return BadRequest(result.Mensaje);
+                }
+                else
+                {
+                    return Ok(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPost("EgresoStock")]
+        public IActionResult EgresoStock([FromBody] EgresoStockDTO egresoStockDTO)
+        {
+            try
+            {
+                var result = _stockService.EgresoStock(egresoStockDTO.CodigoArticulo, (int)egresoStockDTO.IdDeposito, (decimal)egresoStockDTO.Cantidad);
+
+                if (result.HuboError)
+                {
+                    return BadRequest(result.Mensaje);
+                }
+                else
+                {
+                    return Ok(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         [HttpPut("{id}")]
         public IActionResult ActualizarStock(int id, StockDTO stockDTO)
         {
